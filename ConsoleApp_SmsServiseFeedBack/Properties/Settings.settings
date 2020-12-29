@@ -1,0 +1,39 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ConsoleApp_SmsServiseFeedBack.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="login" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">cattlescan</Value>
+    </Setting>
+    <Setting Name="password" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">cattlescan2020</Value>
+    </Setting>
+    <Setting Name="url_FeedBack" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://api.smsfeedback.ru/messages/v2/send/</Value>
+    </Setting>
+    <Setting Name="EmailHost" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">smtp.gmail.com</Value>
+    </Setting>
+    <Setting Name="EmailUserName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1960tix@gmail.com</Value>
+    </Setting>
+    <Setting Name="EmailPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">mhciukgztxjjxnso</Value>
+    </Setting>
+    <Setting Name="FeedBackSender" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">cattlescan</Value>
+    </Setting>
+    <Setting Name="GapsLimit" Type="System.Single" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="LogPage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">nl-6672920</Value>
+    </Setting>
+    <Setting Name="LogUser_id" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Admin 2020-12-29</Value>
+    </Setting>
+    <Setting Name="LogFunction_query" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SMS service FeedBack</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

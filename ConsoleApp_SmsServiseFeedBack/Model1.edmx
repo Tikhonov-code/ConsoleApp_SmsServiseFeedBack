@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB_A4A060_csModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Farm_Alert_Rules">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AspNetUser_Id" Type="nvarchar" MaxLength="128" />
+          <Property Name="Alert_Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="sms" Type="bit" Nullable="false" />
+          <Property Name="email" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FarmCows">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AspNetUser_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Bolus_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FarmPhones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AspNetUser_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Phone" Type="nchar" MaxLength="12" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="nvarchar" MaxLength="128" />
+          <Property Name="page" Type="nvarchar" MaxLength="300" />
+          <Property Name="function_query" Type="nvarchar" MaxLength="250" />
+          <Property Name="error" Type="nvarchar" MaxLength="300" />
+          <Property Name="note" Type="nvarchar" MaxLength="300" />
+          <Property Name="datestamp" Type="datetime2" Precision="7" />
+          <Property Name="recipient" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SmsLogs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="event" Type="varchar" MaxLength="10" />
+          <Property Name="message" Type="varchar" MaxLength="500" />
+          <Property Name="phonenumber" Type="varchar" MaxLength="15" />
+          <Property Name="status" Type="nchar" MaxLength="50" />
+          <Property Name="datemark" Type="datetime" />
+          <Property Name="smscId" Type="nchar" MaxLength="72" Nullable="false" />
+          <Property Name="AspNetUser_Id" Type="nchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Z_AlertLogs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bolus_id" Type="int" Nullable="false" />
+          <Property Name="event" Type="varchar" MaxLength="10" />
+          <Property Name="message" Type="varchar" MaxLength="500" />
+          <Property Name="date_emailsent" Type="datetime2" Precision="7" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Function Name="SMS_Get_PhonesListByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user_id_list" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="SMS_GetZ_AlertLogsByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dt" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="DB_A4A060_csModelStoreContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Farm_Alert_Rules" EntityType="Self.Farm_Alert_Rules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FarmCows" EntityType="Self.FarmCows" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FarmPhones" EntityType="Self.FarmPhones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SmsLogs" EntityType="Self.SmsLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Z_AlertLogs" EntityType="Self.Z_AlertLogs" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_A4A060_csModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Farm_Alert_Rules">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AspNetUser_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Alert_Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sms" Type="Boolean" Nullable="false" />
+          <Property Name="email" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FarmCow">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AspNetUser_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Bolus_ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="page" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="function_query" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="error" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="note" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="datestamp" Type="DateTime" Precision="7" />
+          <Property Name="recipient" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SmsLog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="event" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="phonenumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="datemark" Type="DateTime" Precision="3" />
+          <Property Name="smscId" Type="String" MaxLength="72" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="AspNetUser_Id" Type="String" MaxLength="128" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Z_AlertLogs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bolus_id" Type="Int32" Nullable="false" />
+          <Property Name="event" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="date_emailsent" Type="DateTime" Precision="7" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="DB_A4A060_csEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Farm_Alert_Rules" EntityType="Self.Farm_Alert_Rules" />
+          <EntitySet Name="FarmCows" EntityType="Self.FarmCow" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
+          <EntitySet Name="SmsLogs" EntityType="Self.SmsLog" />
+          <EntitySet Name="Z_AlertLogs" EntityType="Self.Z_AlertLogs" />
+          <EntitySet Name="FarmPhones" EntityType="DB_A4A060_csModel.FarmPhone" />
+          <FunctionImport Name="SMS_Get_PhonesListByUserID" ReturnType="Collection(DB_A4A060_csModel.SMS_Get_PhonesListByUserID_Result)">
+          <Parameter Name="user_id_list" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SMS_GetZ_AlertLogsByDate" ReturnType="Collection(DB_A4A060_csModel.SMS_GetZ_AlertLogsByDate_Result)">
+          <Parameter Name="dt" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="FarmPhone">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AspNetUser_ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="SMS_Get_PhonesListByUserID_Result">
+          <Property Type="String" Name="phone" Nullable="true" MaxLength="11" />
+          <Property Type="String" Name="AspNetUser_ID" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Alert_Name" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="SMS_GetZ_AlertLogsByDate_Result">
+          <Property Type="Int32" Name="bolus_id" Nullable="true" />
+          <Property Type="String" Name="event" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="message" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="date_emailsent" Nullable="true" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="AspNetUser_ID" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="12" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_A4A060_csModelStoreContainer" CdmEntityContainer="DB_A4A060_csEntities">
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="DB_A4A060_csModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Farm_Alert_Rules">
+            <EntityTypeMapping TypeName="DB_A4A060_csModel.Farm_Alert_Rules">
+              <MappingFragment StoreEntitySet="Farm_Alert_Rules">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="AspNetUser_Id" ColumnName="AspNetUser_Id" />
+                <ScalarProperty Name="Alert_Name" ColumnName="Alert_Name" />
+                <ScalarProperty Name="sms" ColumnName="sms" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FarmCows">
+            <EntityTypeMapping TypeName="DB_A4A060_csModel.FarmCow">
+              <MappingFragment StoreEntitySet="FarmCows">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="AspNetUser_ID" ColumnName="AspNetUser_ID" />
+                <ScalarProperty Name="Bolus_ID" ColumnName="Bolus_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="DB_A4A060_csModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="page" ColumnName="page" />
+                <ScalarProperty Name="function_query" ColumnName="function_query" />
+                <ScalarProperty Name="error" ColumnName="error" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="datestamp" ColumnName="datestamp" />
+                <ScalarProperty Name="recipient" ColumnName="recipient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SmsLogs">
+            <EntityTypeMapping TypeName="DB_A4A060_csModel.SmsLog">
+              <MappingFragment StoreEntitySet="SmsLogs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="event" ColumnName="event" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="datemark" ColumnName="datemark" />
+                <ScalarProperty Name="smscId" ColumnName="smscId" />
+                <ScalarProperty Name="AspNetUser_Id" ColumnName="AspNetUser_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Z_AlertLogs">
+            <EntityTypeMapping TypeName="DB_A4A060_csModel.Z_AlertLogs">
+              <MappingFragment StoreEntitySet="Z_AlertLogs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="bolus_id" ColumnName="bolus_id" />
+                <ScalarProperty Name="event" ColumnName="event" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="date_emailsent" ColumnName="date_emailsent" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FarmPhones">
+            <EntityTypeMapping TypeName="DB_A4A060_csModel.FarmPhone">
+              <MappingFragment StoreEntitySet="FarmPhones">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="AspNetUser_ID" ColumnName="AspNetUser_ID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SMS_Get_PhonesListByUserID" FunctionName="DB_A4A060_csModel.Store.SMS_Get_PhonesListByUserID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_A4A060_csModel.SMS_Get_PhonesListByUserID_Result">
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="AspNetUser_ID" ColumnName="AspNetUser_ID" />
+                <ScalarProperty Name="Alert_Name" ColumnName="Alert_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SMS_GetZ_AlertLogsByDate" FunctionName="DB_A4A060_csModel.Store.SMS_GetZ_AlertLogsByDate" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_A4A060_csModel.SMS_GetZ_AlertLogsByDate_Result">
+                <ScalarProperty Name="bolus_id" ColumnName="bolus_id" />
+                <ScalarProperty Name="event" ColumnName="event" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="date_emailsent" ColumnName="date_emailsent" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="AspNetUser_ID" ColumnName="AspNetUser_ID" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
